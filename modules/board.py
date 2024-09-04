@@ -9,6 +9,11 @@ def draw_board(screen, font, status):
         screen.blit(font.render(status_txt[status], True, FONT_RGB), (20, 820))
 
 
+def draw_promotion_menu(promotion_options, menu_rects):
+    for i, option in enumerate(promotion_options):
+        menu_rect = pygame.Rect(600, HEIGHT - 120 + i * 30, 100, 30)
+        menu_rects.append(menu_rect)
+
 def draw_pieces_from_fen(screen, white_images_list, black_images_list, fen=FEN_DEFAULT):
     # Dictionary to map FEN characters to indices in the image lists
     piece_to_image_index = {

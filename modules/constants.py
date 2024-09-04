@@ -3,8 +3,8 @@ NO_ROWS = 8
 NO_COLUMNS = NO_ROWS
 PIECES_SIZE = 80
 SQUARE_SIZE = 100
-MENU_HEIGHT = 100
-FONT_SIZE = 40
+MENU_HEIGHT = 150
+FONT_SIZE = 20
 FPS = 60
 SELECTED_SQUARE_FRAME_SIZE = 2
 
@@ -23,6 +23,8 @@ FEN_RANDOM_1 = "8/P1K2p2/b3p2k/8/1p1r1N2/B1pPp3/8/q4R1r w - - 0 1"
 FEN_RANDOM_2 = "rnb1kb1r/p1p1pppp/5n2/3p1P1q/8/BPN2Q2/PP1PP1PP/R3KBNR w KQkq - 0 1"
 
 SQUARES_COORDS = []
+
+CHESS_ENGINE_PORT = 12347
 
 # Letters for the file (a-h) and numbers for the rank (8-1)
 files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
