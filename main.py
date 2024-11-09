@@ -258,7 +258,6 @@ def main():
             screen.fill(DARK_SQUARES_RGB)
             pygame.draw.rect(screen, MENU_RGB, [0, HEIGHT - MENU_HEIGHT, WIDTH, MENU_HEIGHT])
             draw_board(screen, font, state)
-            draw_pieces_from_fen(screen, white_images_list, black_images_list, all_fens[current_fen_index])
 
             for i, rect in enumerate(menu_rects):
                 pygame.draw.rect(screen, BLACK, rect)
@@ -268,6 +267,7 @@ def main():
 
             if not player_turn and current_fen_index == len(all_fens) - 1:
                 fen = communicate_with_engine(s, all_fens[-1])  # Get the engine's move
+                print(f"Fen from dummy: {fen}")
                 board = chess.Board(fen)
                 all_fens.append(fen)  # Store engine's FEN
                 current_fen_index += 1  # Update to the new position
@@ -311,7 +311,6 @@ def main():
                         square_2 = None
                         selected_square = None
                         player_turn = False  # Switch to the engine's turn
-                        draw_pieces_from_fen(screen, white_images_list, black_images_list, fen)
                     elif move_promotion in board.legal_moves:
                         board.push(move_promotion)
                         fen = board.fen()
@@ -321,11 +320,9 @@ def main():
                         square_2 = None
                         selected_square = None
                         player_turn = False  # Switch to the engine's turn
-                        draw_pieces_from_fen(screen, white_images_list, black_images_list, fen)
                     else:
                         print("TRIED TO EXECUTE ILLEGAL MOVE")
                         pygame.quit()
-                    # draw_pieces_from_fen(screen, white_images_list, black_images_list, fen)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -352,6 +349,7 @@ def main():
                     elif event.key == pygame.K_HOME:  # Go to the first position
                         current_fen_index = 0
 
+            draw_pieces_from_fen(screen, white_images_list, black_images_list, all_fens[current_fen_index])
             pygame.display.flip()
         pygame.quit()
 
