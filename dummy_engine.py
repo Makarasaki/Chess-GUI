@@ -19,9 +19,9 @@ def start_dummy_engine(host='localhost', port=12347):
         server_socket.listen(1)
         print(f"Dummy chess engine listening on {host}:{port}")
         
-        while True:
-            client_socket, addr = server_socket.accept()
-            with client_socket:
+        client_socket, addr = server_socket.accept()
+        with client_socket:
+            while True:
                 print(f"Connected by {addr}")
                 data = client_socket.recv(1024)
                 if not data:
