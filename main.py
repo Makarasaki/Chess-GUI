@@ -49,7 +49,6 @@ def main():
     menu_rects = []
 
     run = True
-    screenshot_index = 0
     last_no_moves = 0
     state = 0
     x_coord = 10
@@ -61,6 +60,12 @@ def main():
     draw_board(screen, font, state)
     draw_pieces_from_fen(screen, white_images_list, black_images_list, fen)
     pygame.display.flip()
+
+    if len(all_fens) > last_no_moves:
+        last_no_moves = len(all_fens)
+        surface = pygame.display.get_surface()
+        pygame.image.save(surface, f"screenshots/{len(all_fens)}.png")
+        print(f"Screenshot saved as {len(all_fens)}.png")
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect(('localhost', CHESS_ENGINE_PORT))
@@ -161,15 +166,17 @@ def main():
                     elif event.key == pygame.K_HOME:  # Go to the first position
                         current_fen_index = 0
 
-            draw_pieces_from_fen(screen, white_images_list, black_images_list, all_fens[current_fen_index])
-            pygame.display.flip()
-
             if len(all_fens) > last_no_moves:
+                draw_pieces_from_fen(screen, white_images_list, black_images_list, all_fens[-1])
+                pygame.display.flip()
+
                 last_no_moves = len(all_fens)
                 surface = pygame.display.get_surface()
-                pygame.image.save(surface, f"screenshots/{screenshot_index}.png")
-                print(f"Screenshot saved as {screenshot_index}.png")
-                screenshot_index +=1
+                pygame.image.save(surface, f"screenshots/{len(all_fens)}.png")
+                print(f"Screenshot saved as {len(all_fens)}.png")
+                
+            draw_pieces_from_fen(screen, white_images_list, black_images_list, all_fens[current_fen_index])
+            pygame.display.flip()
         pygame.quit()
 
 if __name__ == "__main__":
