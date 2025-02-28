@@ -5,7 +5,6 @@ import socket
 from modules.chess_pieces import *
 from modules.board import *
 from modules.constants import *
-import time
 
 def communicate_with_engine(s, fen):
     s.sendall(fen.encode('utf-8'))
@@ -36,8 +35,8 @@ def main():
     timer = pygame.time.Clock()
 
     fen = FEN_DEFAULT
-    all_fens = [fen]  # List to store all FEN positions
-    current_fen_index = 0  # Index to track current position in all_fens
+    all_fens = [fen] 
+    current_fen_index = 0
     player_is_white = False
     white_turn = True
     player_turn = player_is_white
@@ -82,9 +81,15 @@ def main():
 
 
             if not player_turn and current_fen_index == len(all_fens) - 1:
-                fen = communicate_with_engine(s, all_fens[-1])  # Get the engine's move
-                print(f"Fen from engine: {fen}")
-                board = chess.Board(fen)
+                resp = communicate_with_engine(s, all_fens[-1])  # Get the engine's move
+                print(f"Response from engine: {resp}")
+                if len(resp) < 8:
+                    print(board.push_uci(resp))
+                    fen = board.fen()
+                else:
+                    fen = resp
+                    board = chess.Board(fen)
+
                 all_fens.append(fen)  # Store engine's FEN
                 current_fen_index += 1  # Update to the new position
                 player_turn = True  # Give control back to the player

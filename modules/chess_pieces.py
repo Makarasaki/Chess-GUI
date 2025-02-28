@@ -1,5 +1,5 @@
 import pygame
-from modules.constants import PIECES_SIZE
+from modules.constants import PIECES_SIZE, PAWN_SIZE
 
 white_pieces = ['rook', 'knight', 'bishop', 'king', 'queen', 'bishop', 'knight', 'rook',
                 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn']
@@ -29,7 +29,7 @@ white_knight = pygame.image.load('chess_pieces_images/white knight.png')
 white_knight = pygame.transform.scale(white_knight, (PIECES_SIZE, PIECES_SIZE))
 
 white_pawn = pygame.image.load('chess_pieces_images/white pawn.png')
-white_pawn = pygame.transform.scale(white_pawn, (PIECES_SIZE, PIECES_SIZE))
+white_pawn = pygame.transform.scale(white_pawn, (PAWN_SIZE, PAWN_SIZE))
 
 black_queen = pygame.image.load('chess_pieces_images/black queen.png')
 black_queen = pygame.transform.scale(black_queen, (PIECES_SIZE, PIECES_SIZE))
@@ -47,7 +47,7 @@ black_knight = pygame.image.load('chess_pieces_images/black knight.png')
 black_knight = pygame.transform.scale(black_knight, (PIECES_SIZE, PIECES_SIZE))
 
 black_pawn = pygame.image.load('chess_pieces_images/black pawn.png')
-black_pawn = pygame.transform.scale(black_pawn, (PIECES_SIZE, PIECES_SIZE))
+black_pawn = pygame.transform.scale(black_pawn, (PAWN_SIZE, PAWN_SIZE))
 
 white_images_list = [white_pawn, white_queen, white_king, white_knight, white_rook, white_bishop]
 black_images_list = [black_pawn, black_queen, black_king, black_knight, black_rook, black_bishop]

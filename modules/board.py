@@ -15,13 +15,12 @@ def draw_promotion_menu(promotion_options, menu_rects):
         menu_rects.append(menu_rect)
 
 def draw_pieces_from_fen(screen, white_images_list, black_images_list, fen=FEN_DEFAULT):
-    # Dictionary to map FEN characters to indices in the image lists
     piece_to_image_index = {
         'P': 0, 'N': 3, 'B': 5, 'R': 4, 'Q': 1, 'K': 2,  # White pieces
         'p': 0, 'n': 3, 'b': 5, 'r': 4, 'q': 1, 'k': 2   # Black pieces
     }
 
-    # Split the FEN string to get the piece placement part
+    # Split the FEN
     rows = fen.split(' ')[0].split('/')
 
     for row_index, row in enumerate(rows):
@@ -35,11 +34,14 @@ def draw_pieces_from_fen(screen, white_images_list, black_images_list, fen=FEN_D
                 else:  # Black piece
                     piece_image = black_images_list[piece_to_image_index[char]]
 
-                # Calculate the position on the screen
-                x_pos = col_index * SQUARE_SIZE + PIECES_OFFSET
-                y_pos = row_index * SQUARE_SIZE + PIECES_OFFSET
+                if char in ['P', 'p']:
+                    x_pos = col_index * SQUARE_SIZE + PAWN_OFFSET
+                    y_pos = row_index * SQUARE_SIZE + PAWN_OFFSET + (PIECES_SIZE - PAWN_SIZE)/2
+                else:
+                    x_pos = col_index * SQUARE_SIZE + PIECES_OFFSET
+                    y_pos = row_index * SQUARE_SIZE + PIECES_OFFSET
 
                 # Draw the piece on the screen
                 screen.blit(piece_image, (x_pos, y_pos))
 
-                col_index += 1  # Move to the next column
+                col_index += 1
