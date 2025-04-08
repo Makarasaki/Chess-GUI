@@ -35,6 +35,9 @@ def main():
     timer = pygame.time.Clock()
 
     fen = FEN_DEFAULT
+    fen = FEN_MIDGAME
+    fen = FEN_ENDGAME
+    fen = FEN_WIN
     all_fens = [fen] 
     current_fen_index = 0
     player_is_white = False

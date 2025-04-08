@@ -6,12 +6,12 @@ def draw_board(screen, font, status):
         for row in range(NO_ROWS):
             for col in range(row % 2, NO_COLUMNS, 2):
                 pygame.draw.rect(screen, LIGHT_SQUARES_RGB, (col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
-        screen.blit(font.render(status_txt[status], True, FONT_RGB), (20, 820))
+        screen.blit(font.render(status_txt[status], True, FONT_RGB), (20, HEIGHT - MENU_HEIGHT))
 
 
 def draw_promotion_menu(promotion_options, menu_rects):
     for i, option in enumerate(promotion_options):
-        menu_rect = pygame.Rect(600, HEIGHT - 120 + i * 30, 100, 30)
+        menu_rect = pygame.Rect(WIDTH - SQUARE_SIZE, HEIGHT - MENU_HEIGHT + i * 30, SQUARE_SIZE, 30)
         menu_rects.append(menu_rect)
 
 def draw_pieces_from_fen(screen, white_images_list, black_images_list, fen=FEN_DEFAULT):
